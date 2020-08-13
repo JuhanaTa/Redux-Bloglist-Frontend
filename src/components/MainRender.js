@@ -6,7 +6,7 @@ import Blog from '../components/Blog'
 import { removeUser } from '../reducers/loginReducer'
 
 import {
-  Switch, Route, Link, Redirect, useRouteMatch,
+  Switch, Route, Link, Redirect, useRouteMatch, NavLink
 } from 'react-router-dom'
 import OneUser from './OneUser'
 import OneBLog from './OneBlog'
@@ -71,7 +71,7 @@ const UserList =  ({ createBlogForm }) => {
     )
   }
 
-  const users = () => {
+  const Users = () => {
     return(
       <div>
         {user.name === undefined ? <LoginForm />:
@@ -111,10 +111,8 @@ const UserList =  ({ createBlogForm }) => {
     return(
       <Navbar bg="primary" variant="dark">
         <Nav>
-          <Nav.Link href="/">Home</Nav.Link>
-          <Nav.Link href="/users">Users</Nav.Link>
+          <Navbar.Text ><NavLink  to="/">Home</NavLink>     <NavLink to="/users">Users</NavLink>   <Button className="ml-auto" handleClick={logoutHandler} text='logout' /></Navbar.Text>
           <Navbar.Brand className="ml-auto">Logged in as {user.name}</Navbar.Brand>
-          <Button className="ml-auto" handleClick={logoutHandler} text='logout' />
         </Nav>
       </Navbar>
     )
@@ -131,7 +129,6 @@ const UserList =  ({ createBlogForm }) => {
     : null
 
   return (
-
     <div>
       <Navigation/>
       <Notification />
@@ -148,7 +145,7 @@ const UserList =  ({ createBlogForm }) => {
           <OneUser oneUser={ParamUser} user={user} />
         </Route>
         <Route path="/users">
-          {users()}
+          <Users/>
         </Route>
         <Route path="/">
           {home()}
